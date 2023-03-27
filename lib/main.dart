@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:norea_school_student/Opening_Screen.dart';
 import 'package:norea_school_student/pages/leaderboard.dart';
 import 'package:norea_school_student/pages/progress_page.dart';
@@ -35,6 +36,8 @@ class HomePage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: AppColors.primaryColor),
           centerTitle: true,
           title: const Text("اسم الطالبة"),
           backgroundColor: AppColors.primaryColor,
