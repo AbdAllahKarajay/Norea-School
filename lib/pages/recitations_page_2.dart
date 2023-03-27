@@ -41,7 +41,7 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       );
 
   Widget buildDataTable() {
-    final columns = ['اسم الآنسة', 'الأصل', 'المجلد', 'عدد الصفحات', 'الصفحات', 'التقدير', 'عدد الأخطاء', 'الزمن', 'التاريخ'];
+    final columns = ['اسم الآنسة', 'عدد الصفحات', 'التاريخ', 'الأصل', 'المجلد', 'الصفحات', 'التقدير', 'عدد الأخطاء', 'الزمن'];
 
     return DataTable(
       sortAscending: isAscending,
@@ -60,9 +60,9 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
 
   List<DataRow> getRows(List<Recitation> recitations) => recitations.map((Recitation recitation) {
     final cells = [
-      recitation.instName, recitation.book, recitation.tome,
-      recitation.pages.length, recitation.pages, recitation.rate,
-      recitation.NOM, recitation.time, recitation.date,
+      recitation.instName, recitation.pages.length,  recitation.date,
+      recitation.book, recitation.tome, recitation.pages,
+      recitation.rate, recitation.NOM, recitation.time,
     ];
 
     return DataRow(cells: getCells(cells));
@@ -78,28 +78,28 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
           compareSame(ascending, rec1.instName, rec2.instName));
     } else if (columnIndex == 1) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.book, rec2.book));
+          compareSame(ascending, rec1.pages.length, rec2.pages.length));
     } else if (columnIndex == 2) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.tome, rec2.tome));
+          compareSame(ascending, rec1.date, rec2.date));
     } else if (columnIndex == 3) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.pages.length, rec2.pages.length));
+          compareSame(ascending, rec1.book, rec2.book));
     } else if (columnIndex == 4) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.pages.first, rec2.pages.first));
+          compareSame(ascending, rec1.tome, rec2.tome));
     } else if (columnIndex == 5) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.rate, rec2.rate));
+          compareSame(ascending, rec1.pages.first, rec2.pages.first));
     }else if (columnIndex == 6) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.NOM, rec2.NOM));
+          compareSame(ascending, rec1.rate, rec2.rate));
     }else if (columnIndex == 7) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.time, rec2.time));
+          compareSame(ascending, rec1.NOM, rec2.NOM));
     }else if (columnIndex == 8) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.date, rec2.date));
+          compareSame(ascending, rec1.time, rec2.time));
 
     }
 

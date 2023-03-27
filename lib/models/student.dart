@@ -1,6 +1,7 @@
 class Student{
   final String name;
-  final int avg;
+  final double avg;
+  final int pLW;
 
-  Student(this.name, this.avg);
+  Student(this.name, this.avg, this.pLW);
 }

@@ -38,7 +38,7 @@ class _RecitationsPageState extends State<RecitationsPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('%التقدير:  ${recData[index ~/ 2].rate}',
-                    style: TextStyle(color: Color.fromARGB(200, 300 - (recData[index ~/ 2].rate*3), 100 + (recData[index ~/ 2].rate), 0)),),
+                    style: TextStyle(color: Color.fromARGB(200, 350 - (recData[index ~/ 2].rate*3.2.floor()), 90 + (recData[index ~/ 2].rate*0.8.ceil()), 0)),),
                   Text('عدد الأخطاء:  ${recData[index ~/ 2].NOM}'),
                 ],
               ),

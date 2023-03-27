@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:norea_school_student/Opening_Screen.dart';
 import 'package:norea_school_student/pages/leaderboard.dart';
 import 'package:norea_school_student/pages/progress_page.dart';
 import 'package:norea_school_student/pages/recitations_page.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: AppFonts.primaryFont,
       ),
-      home: const HomePage(),
+      home: const Opening_Screen(),
     );
   }
 }
@@ -51,9 +52,10 @@ class HomePage extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
           color: AppColors.secondaryColor,
           child: TabBar(
-            indicatorPadding: const EdgeInsets.only(bottom:46),
-            indicatorColor: AppColors.MainTitleColor,
-            labelColor: AppColors.MainTitleColor,
+            indicatorPadding: const EdgeInsets.only(bottom: 46),
+            indicatorColor: /*AppColors.secondaryColor,*/AppColors.MainTitleColor,
+            indicatorWeight: 2.4,
+            labelColor: /*Colors.white,*/ AppColors.MainTitleColor,
             tabs: const [
               Tab(text: 'تسميعاتي'),
               Tab(text: 'المسار الكلي'),
