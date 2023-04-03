@@ -31,9 +31,9 @@ class _ResultChipsState extends State<ResultChips> {
                   String text = '';
                   switch(index ~/ 2 + 1){
                     case 1: text = 'اليوم'; break;
-                    case 2: text = 'جميع التسميعات'; break;
-                    case 3: text = 'محصلة اسبوعي'; break;
-                    case 4: text = 'محصلة شهري'; break;
+                    case 2: text = 'التسميعات'; break;
+                    case 3: text = 'اسبوعية'; break;
+                    case 4: text = 'شهرية'; break;
                   }
                   return Text(text);
                 },),

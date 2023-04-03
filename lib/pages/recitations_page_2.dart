@@ -48,7 +48,15 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
         );
 
   Widget buildDataTable() {
-    final myColumns = ['اسم الآنسة', 'التاريخ', 'الصفحات', 'التقدير', 'عدد الأخطاء', 'الزمن', 'عدد الصفحات'].reversed.toList();
+    final List<Widget> myColumns = const [
+      Text('اسم الآنسة'),
+      Text('التاريخ'),
+      Text('الصفحات'),
+      Icon(Icons.star_rate_rounded),
+      Icon(Icons.error_rounded),
+      Icon(Icons.timelapse_rounded),
+      Icon(Icons.my_library_books_rounded)
+    ].reversed.toList();
 
     return DataTable(
       border: TableBorder(
@@ -57,17 +65,19 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
           right: BorderSide(color: AppColors.Laurel),
           // bottom: BorderSide(color: AppColors.Laurel),
       ),
+
+      columnSpacing: 20,
       sortAscending: isAscending,
       sortColumnIndex: sortColumnIndex,
-      columns: getColumns(myColumns.getRange(0, isRes? 2: 6).toList()),
+      columns: getColumns(myColumns.getRange(0, isRes? 2: 7).toList()),
       rows: getRows(recitations),
     );
   }
 
-  List<DataColumn> getColumns(List<String> columns) {
+  List<DataColumn> getColumns(List<Widget> columns) {
     return columns
-      .map((String column) => DataColumn(
-    label: Text(column),
+      .map((column) => DataColumn(
+    label: column,
     onSort: onSort,
   )).toList();
   }
@@ -78,10 +88,10 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       recitation.time,
       recitation.NOM,
       recitation.rate,
-      recitation.pages,
+      recitation.pages.join(","),
       recitation.date,
       recitation.instName,
-    ].getRange(0, isRes? 2: 6).toList();
+    ].getRange(0, isRes? 2: 7).toList();
 
     return DataRow(cells: getCells(cells));
   }).toList();

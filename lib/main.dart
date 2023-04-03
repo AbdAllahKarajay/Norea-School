@@ -43,12 +43,6 @@ class HomePage extends StatelessWidget {
             centerTitle: true,
             title: const Text("اسم الطالبة"),
             backgroundColor: AppColors.primaryColor,
-            actions: [
-              IconButton(icon: const Icon(Icons.leaderboard),
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Leaderboard()))
-              ),
-            ],
             // leading: IconButton(icon: const Icon(Icons.table_chart),
             //     onPressed: () => Navigator.push(context,
             //         MaterialPageRoute(builder: (context)=>const RecitationsPage2()))
@@ -56,27 +50,33 @@ class HomePage extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: AppColors.primaryColor,
-            onPressed: (){},
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Leaderboard())),
             child: const Icon(Icons.leaderboard),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            color: AppColors.secondaryColor,
-            child: TabBar(
-              // indicatorPadding: const EdgeInsets.only(bottom: 46),
-              // indicatorColor: /*AppColors.secondaryColor,*/AppColors.MainTitleColor,
-              // indicatorSize: TabBarIndicatorSize.tab,
-              indicatorWeight: 0.1,
-              labelColor: /*Colors.white,*/ AppColors.MainTitleColor,
-              unselectedLabelColor: Colors.black54,
-              tabs: const [
-                Tab(text: 'تسميعاتي', icon: Icon(Icons.person_rounded)),
-                Tab(text: 'المسار الكلي', icon: Icon(Icons.trending_up_rounded)),
-              ],
+          bottomNavigationBar: Container(
+            color: AppColors.secondaryColor.withOpacity(0.35),
+            child: BottomAppBar(
+              shape: const CircularNotchedRectangle(),
+              color: AppColors.secondaryColor,
+              child: TabBar(
+                // indicatorPadding: const EdgeInsets.only(bottom: 46),
+                indicatorColor: Colors.transparent,//AppColors.MainTitleColor,
+                // indicatorSize: TabBarIndicatorSize.tab,
+                // indicatorWeight: 2.4,
+                labelColor: /*Colors.white,*/ AppColors.MainTitleColor,
+                unselectedLabelColor: Colors.black54,
+                // physics: NeverScrollableScrollPhysics(),
+                tabs: const [
+                  Tab(text: 'تسميعاتي',),// icon: Icon(Icons.person_rounded), iconMargin: EdgeInsets.all(0)),
+                  Tab(text: 'المسار الكلي',)// icon: Icon(Icons.trending_up_rounded),  iconMargin: EdgeInsets.all(0)),
+                ],
+              ),
             ),
           ),
           body: const TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             children: [RecitationsPage2(), ProgressPage()],
           ),
         ),

@@ -16,8 +16,8 @@ class _Opening_ScreenState extends State<Opening_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Color.fromARGB(255, 12, 205, 163).withOpacity(0.8)),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(200, 243, 193, 84)),//Color.fromARGB(255, 12, 205, 163).withOpacity(0.8)),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -25,7 +25,7 @@ class _Opening_ScreenState extends State<Opening_Screen> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("images/Background Image.jpg"),
                 fit: BoxFit.cover)),
@@ -35,18 +35,18 @@ class _Opening_ScreenState extends State<Opening_Screen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    width: MediaQuery.of(context).size.width ,
                     child: Image.asset(
                       "images/Logo.png",
                       fit: BoxFit.contain,
                     )),
-                Text("تطبيق الطالبة",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: MediaQuery.of(context).size.height * 0.03,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: AppFonts.secondaryFont)),
+                // Text("تطبيق الطالبة",
+                //     style: TextStyle(
+                //         color: Colors.black,
+                //         fontSize: MediaQuery.of(context).size.height * 0.03,
+                //         fontWeight: FontWeight.w500,
+                //         fontFamily: AppFonts.secondaryFont)),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.030,
                 ),
@@ -55,15 +55,17 @@ class _Opening_ScreenState extends State<Opening_Screen> {
                   width: MediaQuery.of(context).size.width * 0.75,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      border: Border.all(width: 2,color: Color.fromARGB(255, 12, 205, 163),)
+                      border: Border.all(width: 2,color: AppColors.secondaryColor//Color.fromARGB(255, 12, 205, 163)
+                        )
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(top: 15),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 15),
                     child: TextField(
-                      style: TextStyle(color: Color.fromARGB(255, 12, 205, 163)),
-                      cursorColor: Color.fromARGB(255, 12, 205, 163),
+                      style: TextStyle(color: AppColors.secondaryColor//Color.fromARGB(255, 12, 205, 163)
+                      ),
+                      cursorColor: AppColors.secondaryColor, //Color.fromARGB(255, 12, 205, 163),
                       textAlign: TextAlign.center,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintStyle: TextStyle(color: Colors.grey),
                         hintText: 'u6a4b8',
@@ -85,11 +87,16 @@ class _Opening_ScreenState extends State<Opening_Screen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         gradient: const LinearGradient(
-                            begin: Alignment.topRight,
-                            end: Alignment.bottomLeft,
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                             colors: [
-                              Color.fromARGB(255, 12, 205, 163),
-                              Color.fromARGB(255, 193, 252, 211),
+                              // AppColors.secondaryColor.withOpacity(0.5),
+                              // AppColors.secondaryColor,
+                              // AppColors.secondaryColor.withOpacity(0.5),
+                              Color.fromARGB(255, 167, 133, 58),  //Color.fromARGB(255, 12, 205, 163),
+                              Color.fromARGB(255, 243, 193, 84), //Color.fromARGB(255, 193, 252, 211),
+                              Color.fromARGB(255, 243, 193, 84), //Color.fromARGB(255, 193, 252, 211),
+                              Color.fromARGB(255, 167, 133, 58),  //Color.fromARGB(255, 12, 205, 163),
                             ])),
                     child: Center(child: Text("تسجيل الدخول", style: TextStyle(
                         color: Colors.white,
