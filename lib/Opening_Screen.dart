@@ -66,7 +66,7 @@ class _Opening_ScreenState extends State<Opening_Screen> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintStyle: TextStyle(color: Colors.grey),
-                        hintText: '724',
+                        hintText: 'u6a4b8',
                       ),
                     ),
                   ),

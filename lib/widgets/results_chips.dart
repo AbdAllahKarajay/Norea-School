@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:norea_school_student/pages/recitations_page_2.dart';
 
 import '../Theme/Colors.dart';
 
-class MyChoiceChips extends StatefulWidget {
-  const MyChoiceChips({super.key, required this.count});
-  final int count;
+class ResultChips extends StatefulWidget {
+  const ResultChips({super.key, required this.notifyParent});
+  final int count = 4;
+  final Function(bool) notifyParent;
 
   @override
-  State<MyChoiceChips> createState() => _MyChoiceChipsState();
+  State<ResultChips> createState() => _ResultChipsState();
 }
 
-class _MyChoiceChipsState extends State<MyChoiceChips> {
+class _ResultChipsState extends State<ResultChips> {
   int _indexSelected = 0;
 
   @override
@@ -26,19 +28,14 @@ class _MyChoiceChipsState extends State<MyChoiceChips> {
               if (index.isEven) return const SizedBox(width: 8);
               return ChoiceChip(
                 label: Builder(builder: (context){
-                  String number = '';
+                  String text = '';
                   switch(index ~/ 2 + 1){
-                    case 1: number = 'الأول'; break;
-                    case 2: number = 'الثاني'; break;
-                    case 3: number = 'الثالث'; break;
-                    case 4: number = 'الرابع'; break;
-                    case 5: number = 'الخامس'; break;
-                    case 6: number = 'السادس'; break;
-                    case 7: number = 'السابع'; break;
-                    case 8: number = 'الثامن'; break;
-                    case 9: number = 'التاسع'; break;
+                    case 1: text = 'اليوم'; break;
+                    case 2: text = 'جميع التسميعات'; break;
+                    case 3: text = 'محصلة اسبوعي'; break;
+                    case 4: text = 'محصلة شهري'; break;
                   }
-                  return Text(number);
+                  return Text(text);
                 },),
                 selected: _indexSelected == index ~/ 2,
                 backgroundColor: AppColors.Downy.withOpacity(0.7),
@@ -50,10 +47,15 @@ class _MyChoiceChipsState extends State<MyChoiceChips> {
                       _indexSelected = index ~/ 2;
                     });
                   }
+                  if(index ~/2 > 1 ){
+                    widget.notifyParent(true);
+                  }else{
+                    widget.notifyParent(false);
+                  }
                 },
               );
             }
-            ),
+        ),
       ),
     );
   }
