@@ -90,9 +90,6 @@ class _Opening_ScreenState extends State<Opening_Screen> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              // AppColors.secondaryColor.withOpacity(0.5),
-                              // AppColors.secondaryColor,
-                              // AppColors.secondaryColor.withOpacity(0.5),
                               Color.fromARGB(255, 167, 133, 58),  //Color.fromARGB(255, 12, 205, 163),
                               Color.fromARGB(255, 243, 193, 84), //Color.fromARGB(255, 193, 252, 211),
                               Color.fromARGB(255, 243, 193, 84), //Color.fromARGB(255, 193, 252, 211),

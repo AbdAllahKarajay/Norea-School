@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:norea_school_student/widgets/choice_chip.dart';
 
 import '../Theme/Colors.dart';
 import '../Theme/Fonts.dart';
 
-class ProgressInBook extends StatelessWidget {
-  ProgressInBook({Key? key, required this.bookName, required this.bookNumber}) : super(key: key);
+class ProgressInBook extends StatefulWidget {
+  const ProgressInBook({Key? key, required this.bookName, required this.bookNumber}) : super(key: key);
   final String bookName;
   final int bookNumber;
 
+  @override
+  State<ProgressInBook> createState() => _ProgressInBookState();
+}
+
+class _ProgressInBookState extends State<ProgressInBook> {
+  Color currentColor = Colors.cyan;
+  Color pickerColor = Colors.cyan;
   final List booksTomes = [1, 4, 9, 4 ,4 ,4 ,4];
 
   @override
@@ -19,13 +27,41 @@ class ProgressInBook extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(bookName),
+          title: Text(widget.bookName),
           backgroundColor: AppColors.primaryColor,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.color_lens_rounded,
+                    size: MediaQuery.of(context).size.height * 0.05),
+                color: Colors.pinkAccent, onPressed: () => showDialog(context: context, builder: (context) => AlertDialog(
+                    title: const Text('اختري لون'),
+                    content: SingleChildScrollView(
+                      child: BlockPicker(
+                        onColorChanged: (value) => setState(() => pickerColor = value),
+                        pickerColor: pickerColor,
+                      ),
+                    ),
+                actions: <Widget>[
+                  ElevatedButton(
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(AppColors.secondaryColor)),
+                    child: const Text('Got it'),
+                    onPressed: () {
+                      setState(() => currentColor = pickerColor);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+                  )),
+              ),
+            )
+          ],
         ),
         body: Column(
           children: [
             const SizedBox(height: 10),
-            MyChoiceChips(count: booksTomes[bookNumber]),
+            MyChoiceChips(count: booksTomes[widget.bookNumber]),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(
@@ -61,6 +97,12 @@ class ProgressInBook extends StatelessWidget {
                                 child: Stack(
                                   children: [
                                     Center(
+                                      child: CircleAvatar(
+                                        radius: MediaQuery.of(context).size.width * 0.04,
+                                        backgroundColor: (index > 10 && index < 20 || index > 30  && index < 45)? currentColor.withOpacity(0.8) : Colors.transparent,
+                                      ),
+                                    ),
+                                    Center(
                                       child: Icon(
                                         FlutterIslamicIcons.quran2,
                                         size: MediaQuery.of(context).size.height * 0.04,
@@ -71,10 +113,11 @@ class ProgressInBook extends StatelessWidget {
                                       child: Text((index + 1).toString(),
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: MediaQuery.of(context).size.height *
-                                                  0.025,
+                                              fontSize: MediaQuery.of(context).size.height * 0.025,
                                               fontFamily: AppFonts.secondaryFont,
-                                              fontWeight: FontWeight.w600)),
+                                              fontWeight: FontWeight.w600
+                                          )
+                                      ),
                                     ),
                                   ],
                                 ),

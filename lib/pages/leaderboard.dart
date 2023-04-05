@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import '../Theme//Colors.dart';
 import '../data/students.dart';
 import '../models/student.dart';
+import '../widgets/leaderboard_single.dart';
 
 class Leaderboard extends StatefulWidget {
   const Leaderboard({super.key});
+
+  final gold = const Color.fromRGBO(255, 215, 0, 1);
+  final silver = const Color.fromRGBO(192, 192, 192, 1);
+  final bronze = const Color.fromRGBO(205, 127, 50, 1);
 
   @override
   State<Leaderboard> createState() => _LeaderboardState();
@@ -21,56 +26,44 @@ class _LeaderboardState extends State<Leaderboard> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+      // backgroundColor: AppColors.secondaryColor,//Color.fromARGB(255, 243, 193, 84),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("الأوائل"),
         backgroundColor: AppColors.primaryColor,
       ),
-      body: ListView.builder(
-        itemCount: students.length+1,
-          itemBuilder: (context, index){
-            if(index == 0){
-              return  Card(
-                color: AppColors.Opal,
-                child: const Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: ListTile(
-                    leading: Text("الترتيب"),
-                    title: Text("الاسم"),
-                    trailing: Text("المعدل اليومي للتسميع"),
-                  ),
-                ),
-              );
-            }
-            return Directionality(
-              textDirection: TextDirection.rtl,
-              child: Card(
-                color: index==1?
-                const Color.fromRGBO(255, 215, 0, 0.5)
-                    :(index ==2)? const Color.fromRGBO(192, 192, 192, 0.5)
-                    :(index == 3)? const Color.fromRGBO(205, 127, 50, 0.4):
-                AppColors.Pampas,
-                child: ListTile(
-                  leading: Container(
-                    height: 25,
-                    width: 25,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 0.2),
-                        borderRadius: BorderRadius.circular((10)),
-                        color: index==1?
-                        const Color.fromRGBO(255, 215, 0, 1)
-                            :(index ==2)? const Color.fromRGBO(192, 192, 192, 1)
-                            :(index == 3)? const Color.fromRGBO(205, 127, 50, 0.8):
-                        Colors.transparent
-                    ),
-                    child: Center(child: Text("$index")),
-                  ),
-                  title:  Text(students[index-1].name),
-                  trailing: Text("${students[index-1].avg}"),
-                )
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.6,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+              child: LeaderBoardSingle(
+                color: widget.bronze, txt: '3',
+                name: students[2].name, avg: students[2].avg,
+                height: 0.2
               ),
-            );
-      }
-    )
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+              child: LeaderBoardSingle(
+                color: widget.gold, txt: '1',
+                name: students[0].name, avg: students[0].avg,
+                height: 0.3,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+              child: LeaderBoardSingle(
+                color: widget.silver, txt: '2',
+                name: students[1].name, avg: students[1].avg,
+                height: 0.25,
+              ),
+            )
+          ],
+        ),
+      )
   );
 }

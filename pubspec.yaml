@@ -39,6 +39,7 @@ dependencies:
   highlight_text: ^1.6.0
   liquid_progress_indicator: ^0.4.0
   flutter_islamic_icons: ^1.0.2
+  flutter_colorpicker: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
   assets:
     - images/Logo.png
     - images/Background Image.jpg
+    - images/crown.png
 
   fonts:
     - family: Sahel
