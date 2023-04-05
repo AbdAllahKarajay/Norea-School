@@ -60,11 +60,7 @@ class _LeaderboardState extends State<Leaderboard> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            // bottom: 1,
-            // top: 0.001,
-            right: 20,
-            width: 150,
-            height: 120,
+            height: 250,
             child: Stack(
               children: [
                 ConfettiWidget(
@@ -156,8 +152,8 @@ class _LeaderboardState extends State<Leaderboard> {
                     ),
                   ],
                 ),
-                leading: CircleAvatar(child: Text("19")),
-                trailing: CircleAvatar(
+                leading: const CircleAvatar(child: Text("19")),
+                trailing: const CircleAvatar(
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.grey,
                   child: Icon(

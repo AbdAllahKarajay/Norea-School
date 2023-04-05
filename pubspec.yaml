@@ -41,6 +41,8 @@ dependencies:
   flutter_islamic_icons: ^1.0.2
   flutter_colorpicker: ^1.0.3
   confetti: ^0.7.0
+  image_picker: ^0.8.7+1
+  path_provider: ^2.0.14
 
 dev_dependencies:
   flutter_test:

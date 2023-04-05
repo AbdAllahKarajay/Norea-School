@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:norea_school_student/Opening_Screen.dart';
@@ -17,17 +18,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Student Demo',
-      theme: ThemeData(
-        fontFamily: AppFonts.primaryFont,
-      ),
-      home: Opening_Screen()
-    );
+        title: 'Student Demo',
+        theme: ThemeData(
+          fontFamily: AppFonts.primaryFont,
+        ),
+        home: Opening_Screen());
   }
 }
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +38,21 @@ class HomePage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            actions: [
+              CircleAvatar(
+                child: Image.asset('null.png'),
+              ),
+            ],
             automaticallyImplyLeading: false,
-            systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: AppColors.primaryColor),
+            systemOverlayStyle:
+                SystemUiOverlayStyle(statusBarColor: AppColors.primaryColor),
             centerTitle: true,
             title: const Text("اسم الطالبة"),
             backgroundColor: AppColors.primaryColor,
-              // leading: IconButton(icon: const Icon(Icons.table_chart),
-              //     onPressed: () => Navigator.push(context,
-              //         MaterialPageRoute(builder: (context)=>const RecitationsPage2()))
-              // ),
+            // leading: IconButton(icon: const Icon(Icons.table_chart),
+            //     onPressed: () => Navigator.push(context,
+            //         MaterialPageRoute(builder: (context)=>const RecitationsPage2()))
+            // ),
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: AppColors.primaryColor,
@@ -54,7 +60,8 @@ class HomePage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const Leaderboard())),
             child: const Icon(Icons.leaderboard),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: Container(
             color: AppColors.secondaryColor.withOpacity(0.35),
             child: BottomAppBar(
@@ -62,15 +69,19 @@ class HomePage extends StatelessWidget {
               color: AppColors.secondaryColor,
               child: TabBar(
                 // indicatorPadding: const EdgeInsets.only(bottom: 46),
-                indicatorColor: Colors.transparent,//AppColors.MainTitleColor,
+                indicatorColor: Colors.transparent, //AppColors.MainTitleColor,
                 // indicatorSize: TabBarIndicatorSize.tab,
                 // indicatorWeight: 2.4,
                 labelColor: /*Colors.white,*/ AppColors.MainTitleColor,
                 unselectedLabelColor: Colors.black54,
                 // physics: NeverScrollableScrollPhysics(),
                 tabs: const [
-                  Tab(text: 'تسميعاتي',),// icon: Icon(Icons.person_rounded), iconMargin: EdgeInsets.all(0)),
-                  Tab(text: 'المسار الكلي',)// icon: Icon(Icons.trending_up_rounded),  iconMargin: EdgeInsets.all(0)),
+                  Tab(
+                    text: 'تسميعاتي',
+                  ), // icon: Icon(Icons.person_rounded), iconMargin: EdgeInsets.all(0)),
+                  Tab(
+                    text: 'المسار الكلي',
+                  ) // icon: Icon(Icons.trending_up_rounded),  iconMargin: EdgeInsets.all(0)),
                 ],
               ),
             ),
