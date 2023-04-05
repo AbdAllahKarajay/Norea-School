@@ -25,10 +25,11 @@ class _ProgressPageState extends State<ProgressPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(gradient: LinearGradient(
-          begin: AlignmentDirectional.topCenter,
-          end: AlignmentDirectional.bottomCenter,
-          colors: [
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: AlignmentDirectional.topCenter,
+              end: AlignmentDirectional.bottomCenter,
+              colors: [
             AppColors.primaryColor.withOpacity(0.5),
             AppColors.secondaryColor.withOpacity(0.35),
             // AppColors.primaryColor.withOpacity(0.6),
@@ -39,8 +40,11 @@ class _ProgressPageState extends State<ProgressPage> {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProgressInBook(bookName: books[index], bookNumber: index))),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProgressInBook(
+                          bookName: books[index], bookNumber: index))),
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),
@@ -59,17 +63,18 @@ class _ProgressPageState extends State<ProgressPage> {
                       height: 18,
                       // padding: const  EdgeInsets.symmetric(horizontal: 8.0),
                       child: LiquidLinearProgressIndicator(
-                        value: booksProgress[index]/100,
-                        valueColor: AlwaysStoppedAnimation(
-                            AppColors.Downy
+                        value: booksProgress[index] / 100,
+                        valueColor: AlwaysStoppedAnimation(AppColors.Downy
                             // AppColors.primaryColor.withOpacity(0.7)
-                        ),
+                            ),
                         backgroundColor: AppColors.Pampas,
                         borderColor: AppColors.Pampas,
                         borderWidth: 0.0,
                         direction: Axis.horizontal,
-                        center: Text("${booksProgress[index]}%", style: const
-                        TextStyle(color: Colors.white),),
+                        center: Text(
+                          "${booksProgress[index]}%",
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                     // Column(
