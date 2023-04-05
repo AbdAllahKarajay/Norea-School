@@ -40,6 +40,7 @@ dependencies:
   liquid_progress_indicator: ^0.4.0
   flutter_islamic_icons: ^1.0.2
   flutter_colorpicker: ^1.0.3
+  confetti: ^0.7.0
 
 dev_dependencies:
   flutter_test:

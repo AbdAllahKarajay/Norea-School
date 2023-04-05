@@ -43,10 +43,10 @@ class HomePage extends StatelessWidget {
             centerTitle: true,
             title: const Text("اسم الطالبة"),
             backgroundColor: AppColors.primaryColor,
-            // leading: IconButton(icon: const Icon(Icons.table_chart),
-            //     onPressed: () => Navigator.push(context,
-            //         MaterialPageRoute(builder: (context)=>const RecitationsPage2()))
-            // ),
+              // leading: IconButton(icon: const Icon(Icons.table_chart),
+              //     onPressed: () => Navigator.push(context,
+              //         MaterialPageRoute(builder: (context)=>const RecitationsPage2()))
+              // ),
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: AppColors.primaryColor,
