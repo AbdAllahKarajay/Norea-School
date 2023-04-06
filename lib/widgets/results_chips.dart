@@ -5,8 +5,8 @@ import '../Theme/Colors.dart';
 
 class ResultChips extends StatefulWidget {
   const ResultChips({super.key, required this.notifyParent});
-  final int count = 4;
-  final Function(bool) notifyParent;
+  final int count = 5;
+  final Function(bool, bool) notifyParent;
 
   @override
   State<ResultChips> createState() => _ResultChipsState();
@@ -31,9 +31,10 @@ class _ResultChipsState extends State<ResultChips> {
                   String text = '';
                   switch(index ~/ 2 + 1){
                     case 1: text = 'اليوم'; break;
-                    case 2: text = 'التسميعات'; break;
-                    case 3: text = 'اسبوعية'; break;
-                    case 4: text = 'شهرية'; break;
+                    case 2: text = 'الكل'; break;
+                    case 3: text = 'اسبوع'; break;
+                    case 4: text = 'شهر'; break;
+                    case 5: text = 'موسم'; break;
                   }
                   return Text(text);
                 },),
@@ -47,10 +48,12 @@ class _ResultChipsState extends State<ResultChips> {
                       _indexSelected = index ~/ 2;
                     });
                   }
-                  if(index ~/2 > 1 ){
-                    widget.notifyParent(true);
+                  if(index ~/2 == 1){
+                    widget.notifyParent(false, false);
+                  }else if(index ~/2 < 1){
+                    widget.notifyParent(false, true);
                   }else{
-                    widget.notifyParent(false);
+                    widget.notifyParent(true, false);
                   }
                 },
               );

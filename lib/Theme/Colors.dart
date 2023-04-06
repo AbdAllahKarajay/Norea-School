@@ -28,5 +28,7 @@ abstract class AppColors
   static Color Laurel = const Color.fromARGB(255, 114, 138,112 );
 
 
-
+  static const Color gold = Color.fromRGBO(234, 193, 85, 1);
+  static const Color silver = Color.fromRGBO(192, 192, 192, 1);
+  static const Color bronze = Color.fromRGBO(205, 127, 50, 1);
 }

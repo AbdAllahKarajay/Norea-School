@@ -10,10 +10,6 @@ import '../widgets/leaderboard_single.dart';
 class Leaderboard extends StatefulWidget {
   const Leaderboard({super.key});
 
-  final gold = const Color.fromRGBO(255, 215, 0, 1);
-  final silver = const Color.fromRGBO(192, 192, 192, 1);
-  final bronze = const Color.fromRGBO(205, 127, 50, 1);
-
   @override
   State<Leaderboard> createState() => _LeaderboardState();
 }
@@ -95,7 +91,7 @@ class _LeaderboardState extends State<Leaderboard> {
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.2),
                       child: LeaderBoardSingle(
-                          color: widget.bronze,
+                          color: AppColors.bronze,
                           txt: '3',
                           name: students[2].name,
                           avg: students[2].avg,
@@ -111,7 +107,7 @@ class _LeaderboardState extends State<Leaderboard> {
                         padding: EdgeInsets.only(
                             top: MediaQuery.of(context).size.height * 0.2),
                         child: LeaderBoardSingle(
-                          color: widget.gold,
+                          color: AppColors.gold,
                           txt: '1',
                           name: students[0].name,
                           avg: students[0].avg,
@@ -123,7 +119,7 @@ class _LeaderboardState extends State<Leaderboard> {
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.2),
                       child: LeaderBoardSingle(
-                        color: widget.silver,
+                        color: AppColors.silver,
                         txt: '2',
                         name: students[1].name,
                         avg: students[1].avg,

@@ -16,6 +16,7 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
   int? sortColumnIndex;
   bool isAscending = false;
   bool isRes = false;
+  bool isDay = false;
 
 
   @override
@@ -49,11 +50,12 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
 
   Widget buildDataTable() {
     final List<Widget> myColumns = const [
-      Text('اسم الآنسة'),
       Text('التاريخ'),
+      Text('اسم الآنسة'),
       Text('الصفحات'),
-      Icon(Icons.star_rate_rounded),
+      Icon(Icons.bookmark, color: Colors.red,),
       Icon(Icons.error_rounded),
+      Icon(Icons.timelapse_rounded, color: Colors.transparent,),
       Icon(Icons.timelapse_rounded),
       Icon(Icons.my_library_books_rounded)
     ].reversed.toList();
@@ -69,7 +71,7 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       columnSpacing: 20,
       sortAscending: isAscending,
       sortColumnIndex: sortColumnIndex,
-      columns: getColumns(myColumns.getRange(0, isRes? 2: 7).toList()),
+      columns: getColumns(myColumns.getRange(0, isRes? 2: isDay? 7: 8).toList()),
       rows: getRows(recitations),
     );
   }
@@ -82,38 +84,67 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
   )).toList();
   }
 
-  List<DataRow> getRows(List<Recitation> recitations) => recitations.map((Recitation recitation) {
-    final cells = [
-      recitation.pages.length,
-      recitation.time,
-      recitation.NOM,
-      recitation.rate,
-      recitation.pages.join(","),
-      recitation.date,
-      recitation.instName,
-    ].getRange(0, isRes? 2: 7).toList();
+  List<DataRow> getRows(List<Recitation> recitations) {
+    int totalPages = 0;
+    int totalTime = 0;
 
-    return DataRow(cells: getCells(cells));
+    List<DataRow> rowsList = recitations.map((Recitation recitation) {
+    final List<DataCell> cells = [
+      DataCell(Text('${recitation.pages.length}')),
+      DataCell(Text('${recitation.time}')),
+      DataCell(Icon(Icons.star, color: AppColors.gold,)),
+      DataCell(Text('${recitation.NOM}')),
+      DataCell(Text('${recitation.rate}')),
+      DataCell(Text(recitation.pages.join(","))),
+      DataCell(Text(recitation.instName)),
+      DataCell(Text(recitation.date)),
+    ].getRange(0, isRes? 2: isDay? 7: 8).toList();
+
+    totalPages += recitation.pages.length;
+    totalTime += recitation.time;
+
+    return DataRow(cells: cells);
   }).toList();
+
+    final lastRowCells = [
+      DataCell(Text('$totalPages')),
+      DataCell(Text('$totalTime')),
+      const DataCell(Text(' -- ')),
+      const DataCell(Text(' -- ')),
+      const DataCell(Text(' -- ')),
+      const DataCell(Text(' -- ')),
+      const DataCell(Text(' -- ')),
+      const DataCell(Text(' -- ')),
+    ].getRange(0, isRes? 2: isDay? 7: 8).toList();
+
+    final lastRow = DataRow(
+      color: MaterialStateColor.resolveWith((states) {
+        return Colors.red.withOpacity(0.3);
+      }),
+      cells: lastRowCells,
+    );
+    rowsList.add(lastRow);
+    return rowsList;
+  }
 
   List<DataCell> getCells(List<dynamic> cells) =>
       cells.map((data) => DataCell(Text('$data'))).toList();
 
 
   void onSort(int columnIndex, bool ascending) {
-    if (columnIndex == 6) {
+    if (columnIndex == 7) {
+      recitations.sort((rec1, rec2) =>
+          compareSame(ascending, rec1.date, rec2.date));
+    } else if (columnIndex == 6) {
       recitations.sort((rec1, rec2) =>
           compareSame(ascending, rec1.instName, rec2.instName));
     } else if (columnIndex == 5) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.date, rec2.date));
+          compareSame(ascending, rec1.pages.first, rec2.pages.first));
     } else if (columnIndex == 4) {
       recitations.sort((rec1, rec2) =>
-          compareSame(ascending, rec1.pages.first, rec2.pages.first));
-    } else if (columnIndex == 3) {
-      recitations.sort((rec1, rec2) =>
           compareSame(ascending, rec1.rate, rec2.rate));
-    } else if (columnIndex == 2) {
+    } else if (columnIndex == 3) {
       recitations.sort((rec1, rec2) =>
           compareSame(ascending, rec1.NOM, rec2.NOM));
     } else if (columnIndex == 1) {
@@ -134,9 +165,10 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
   int compareSame(bool ascending, dynamic value1, dynamic value2) =>
       ascending ? value1.compareTo(value2) : value2.compareTo(value1);
 
-  refresh(isRes) {
+  refresh(isRes, isDay) {
     setState(() {
       sortColumnIndex = 0;
+      this.isDay = isDay;
       this.isRes = isRes;
     });
   }
