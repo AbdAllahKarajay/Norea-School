@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:norea_school_student/Opening_Screen.dart';
+import 'package:norea_school_student/pages/Opening_Screen.dart';
 import 'package:norea_school_student/pages/leaderboard.dart';
 import 'package:norea_school_student/pages/personal_page.dart';
 import 'package:norea_school_student/pages/progress_page.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: AppFonts.primaryFont,
         ),
-        home: Opening_Screen());
+        home: const Opening_Screen());
   }
 }
 
@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
             actions: [
               GestureDetector(
                 onTap: () => Navigator.push(context,MaterialPageRoute(
-                  builder: (context) => const PersonalPage(),)),
+                  builder: (context) => PersonalPage(),)),
                 child: CircleAvatar(
                   radius: MediaQuery.of(context).size.width * 0.06,
                   backgroundColor: Colors.grey.shade400,
@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
             systemOverlayStyle:
                 SystemUiOverlayStyle(statusBarColor: AppColors.primaryColor),
             centerTitle: true,
-            title: const Text("اسم الطالبة"),
+            title: const Text("اسم الطالبة", style: TextStyle(fontFamily: 'fonts/Sahel-VF.ttf'),),
             backgroundColor: AppColors.primaryColor,
           ),
           floatingActionButton: FloatingActionButton(

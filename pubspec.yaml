@@ -74,12 +74,15 @@ flutter:
     - images/Logo.png
     - images/Background Image.jpg
     - images/crown.png
+    - images/emoji.jpg
+    - images/person.jpg
 
   fonts:
     - family: Sahel
       fonts:
         - asset: fonts/Sahel-VF.ttf
           weight: 800
+
 
     - family: Avenir
       fonts:
