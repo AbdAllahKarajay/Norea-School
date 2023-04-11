@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:norea_school_student/pages/personal_page2.dart';
 
 import '../Theme/Colors.dart';
 
@@ -19,6 +20,16 @@ class PersonalPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            actions: [
+              IconButton(
+                  icon: Icon(Icons.sync_alt_outlined),
+                  onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PersonalPage2(),
+                        ),
+                      ))
+            ],
             centerTitle: true,
             pinned: true,
             snap: true,
@@ -26,7 +37,7 @@ class PersonalPage extends StatelessWidget {
             backgroundColor: AppColors.primaryColor,
             expandedHeight: MediaQuery.of(context).size.height * 0.355,
             flexibleSpace: FlexibleSpaceBar(
-              collapseMode: CollapseMode.parallax,
+                collapseMode: CollapseMode.parallax,
                 background: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -35,7 +46,8 @@ class PersonalPage extends StatelessWidget {
                       backgroundColor: Colors.grey.shade400,
                       backgroundImage: AssetImage('images/person.jpg'),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.006),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.006),
                     Text(
                       'رمز التسجيل: u6a4b8',
                       style: TextStyle(
@@ -84,9 +96,10 @@ class PersonalPage extends StatelessWidget {
                                       children: [
                                         Image.asset(
                                           'images/emoji.jpg',
-                                          height:
-                                              MediaQuery.of(context).size.height *
-                                                  0.07,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.07,
                                         ),
                                         Text('2023-4-1')
                                       ],
@@ -111,20 +124,36 @@ class PersonalPage extends StatelessWidget {
                                 ? Row(
                                     children: [
                                       SizedBox(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.1,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.1,
                                       ),
-                                      Text('2023-4-1', style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),),
+                                      Text(
+                                        '2023-4-1',
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.05),
+                                      ),
                                       SizedBox(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.1,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.1,
                                       ),
-                                      Text('رسالة شكر ${index ~/ 2 + 1}', style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),),
+                                      Text(
+                                        'رسالة شكر ${index ~/ 2 + 1}',
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.05),
+                                      ),
                                     ],
                                   )
                                 : SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.height * 0.03,
+                                    width: MediaQuery.of(context).size.height *
+                                        0.03,
                                   ))),
                   ),
                 ),

@@ -15,7 +15,6 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
   late List<Recitation> recitations;
   int? sortColumnIndex;
   bool isAscending = false;
-  bool isRes = false;
   bool isDay = false;
 
 
@@ -34,16 +33,28 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
               colors: [
                 AppColors.primaryColor.withOpacity(0.5),
                 AppColors.secondaryColor.withOpacity(0.35),
-                // AppColors.primaryColor.withOpacity(0.6),
               ])),
           child: ListView(
             children:[
-              ResultChips(notifyParent: refresh),
+              // Container(
+                // color: AppColors.primaryColor.withOpacity(0.5),
+                  // child:
+                  ResultChips(notifyParent: refresh),
+              // ),
               SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  child: buildDataTable()
-              ),
+                  // child: Container(
+                  //     decoration: BoxDecoration(gradient: LinearGradient(
+                  //         begin: AlignmentDirectional.topCenter,
+                  //         end: AlignmentDirectional.bottomCenter,
+                  //         colors: [
+                  //           AppColors.primaryColor.withOpacity(0.5),
+                  //           AppColors.secondaryColor.withOpacity(0.35),
+                  //           // AppColors.primaryColor.withOpacity(0.6),
+                  //         ])),
+                      child: buildDataTable())
+              // ),
             ]
       ),
         );
@@ -71,7 +82,7 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       columnSpacing: 20,
       sortAscending: isAscending,
       sortColumnIndex: sortColumnIndex,
-      columns: getColumns(myColumns.getRange(0, isRes? 2: isDay? 7: 8).toList()),
+      columns: getColumns(myColumns.getRange(0,isDay? 7: 8).toList()),
       rows: getRows(recitations),
     );
   }
@@ -98,7 +109,7 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       DataCell(Text(recitation.pages.join(","))),
       DataCell(Text(recitation.instName)),
       DataCell(Text(recitation.date)),
-    ].getRange(0, isRes? 2: isDay? 7: 8).toList();
+    ].getRange(0, isDay? 7: 8).toList();
 
     totalPages += recitation.pages.length;
     totalTime += recitation.time;
@@ -115,7 +126,7 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       const DataCell(Text(' -- ')),
       const DataCell(Text(' -- ')),
       const DataCell(Text(' -- ')),
-    ].getRange(0, isRes? 2: isDay? 7: 8).toList();
+    ].getRange(0, isDay? 7: 8).toList();
 
     final lastRow = DataRow(
       color: MaterialStateColor.resolveWith((states) {
@@ -169,7 +180,6 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
     setState(() {
       sortColumnIndex = 0;
       this.isDay = isDay;
-      this.isRes = isRes;
     });
   }
 

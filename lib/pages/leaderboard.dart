@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:norea_school_student/pages/personal_page.dart';
 import '../Theme//Colors.dart';
 import '../data/students.dart';
 import '../models/student.dart';
@@ -131,8 +132,11 @@ class _LeaderboardState extends State<Leaderboard> {
               ),
               const Divider(),
               ListTile(
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                    PersonalPage()
+                )),
                 title: const Text(
-                  "اسم الطالبة الفارشة",
+                  "اسم الطالبة",
                   textDirection: TextDirection.rtl,
                 ),
                 subtitle: Row(

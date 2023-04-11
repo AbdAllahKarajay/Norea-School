@@ -101,30 +101,43 @@ class PersonalPage2 extends StatelessWidget {
                           subtitle: Container(
                               height: MediaQuery.of(context).size.height * 0.2,
                               child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return (index % 2 != 0)
-                                        ? Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.05,
-                                          )
-                                        : Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Image.asset(
-                                                'images/emoji.jpg',
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.07,
-                                              ),
-                                              Text('2023-4-1')
-                                            ],
-                                          );
-                                  })),
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: 30,
+                                  itemBuilder: (context, index) => (index % 2 != 0)
+                                      ? Row(
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                        MediaQuery.of(context).size.width *
+                                            0.1,
+                                      ),
+                                      Text(
+                                        '2023-4-1',
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                                0.05),
+                                      ),
+                                      SizedBox(
+                                        width:
+                                        MediaQuery.of(context).size.width *
+                                            0.1,
+                                      ),
+                                      Text(
+                                        'رسالة شكر ${index ~/ 2 + 1}',
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                                0.05),
+                                      ),
+                                    ],
+                                  )
+                                      : SizedBox(
+                                    width: MediaQuery.of(context).size.height *
+                                        0.03,
+                                  )))
                         ),
                       ),
                       const SizedBox(
@@ -140,36 +153,44 @@ class PersonalPage2 extends StatelessWidget {
                                 border:
                                     Border.all(color: Colors.grey, width: 0.1),
                               ),
-                              height: MediaQuery.of(context).size.height * 0.2,
+                              height: MediaQuery.of(context).size.height * 0.4,
                               child: ListView.builder(
                                   scrollDirection: Axis.vertical,
-                                  itemCount: 15,
-                                  itemBuilder: (context, index) => (index % 2 !=
-                                          0)
-                                      ? Row(
-                                          children: [
-                                            SizedBox(
+                                  itemCount: 30,
+                                  itemBuilder: (context, index) =>
+                                      (index % 2 != 0)
+                                          ? Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.06,
+                                                ),
+                                                Text('2023-4-1'),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.1,
+                                                ),
+                                                Text(
+                                                  'رسالة شكر ${index ~/ 2 + 1}',
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.06),
+                                                ),
+                                              ],
+                                            )
+                                          : SizedBox(
                                               width: MediaQuery.of(context)
                                                       .size
-                                                      .width *
-                                                  0.04,
-                                            ),
-                                            Text('2023-4-1'),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.1,
-                                            ),
-                                            Text('رسالة شكر ${index ~/ 2 + 1}'),
-                                          ],
-                                        )
-                                      : SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.03,
-                                        ))),
+                                                      .height *
+                                                  0.03,
+                                            ))),
                         ),
                       ),
                       SizedBox(

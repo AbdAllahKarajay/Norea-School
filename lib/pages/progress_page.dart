@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import '../Theme/Colors.dart';
-import 'progress_in_book.dart';
+import 'progress_in_bookOld.dart';
 
 class ProgressPage extends StatefulWidget {
   const ProgressPage({super.key});
@@ -40,7 +40,7 @@ class _ProgressPageState extends State<ProgressPage> {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProgressInBook(bookName: books[index], bookNumber: index))),
+                  MaterialPageRoute(builder: (context) => ProgressInBookOld(bookName: books[index], bookNumber: index))),
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),

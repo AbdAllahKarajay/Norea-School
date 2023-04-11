@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:norea_school_student/Sahih_Screen/Presentation/sahih_select_screen.dart';
 import 'package:norea_school_student/pages/Opening_Screen.dart';
 import 'package:norea_school_student/pages/leaderboard.dart';
 import 'package:norea_school_student/pages/personal_page.dart';
-import 'package:norea_school_student/pages/progress_page.dart';
 import 'package:norea_school_student/pages/recitations_page_2.dart';
 import 'package:norea_school_student/Theme/Colors.dart';
 import 'package:norea_school_student/Theme/Fonts.dart';
+
+import 'Sahih_Screen/Logic/sahih_cubit.dart';
+import 'Sahih_Screen/Logic/sahih_states.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +22,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        // supportedLocales: const [
+        //   Locale("ar"),
+        // ],
+        // locale:  const Locale("ar"),
         title: 'Student Demo',
         theme: ThemeData(
           fontFamily: AppFonts.primaryFont,
@@ -84,9 +93,9 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          body: const TabBarView(
-            physics: NeverScrollableScrollPhysics(),
-            children: [RecitationsPage2(), ProgressPage()],
+          body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: [const RecitationsPage2(), BlocProvider(create: (context)=>SahihCubit(SahihInitial()),child: const SahihScreen())],
           ),
         ),
       ),
