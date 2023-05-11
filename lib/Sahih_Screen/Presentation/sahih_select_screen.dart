@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
@@ -10,7 +12,6 @@ import 'package:norea_school_student/pages/progress_in_book.dart';
 class SahihScreen extends StatefulWidget {
   const SahihScreen({Key? key}) : super(key: key);
   final List<double> progress = const [100, 100, 100, 100, 20, 0, 0, 0];
-
 
   @override
   State<SahihScreen> createState() => _SahihScreenState();
@@ -48,7 +49,9 @@ class _SahihScreenState extends State<SahihScreen> {
                           MediaQuery.of(context).size.width * 0.05),
                   itemBuilder: (context, index) => SahihWidget(
                         name: state.names[index],
-                        color: (widget.progress[index] > 0)? state.colors[index]: Colors.grey,
+                        color: (widget.progress[index] > 0)
+                            ? state.colors[index]
+                            : Colors.grey,
                         number: index,
                         progress: widget.progress[index],
                       ));
@@ -95,14 +98,14 @@ class SahihWidgetState extends State<SahihWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => (color != Colors.grey)?
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ProgressInBook(
-                  color: color,
-                  bookNumber: number,
-                  progress: progress,
-                ))):
-            null,
+      onTap: () => (color != Colors.grey)
+          ? Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ProgressInBook(
+                    color: color,
+                    bookNumber: number,
+                    progress: progress,
+                  )))
+          : null,
       child: Container(
         height: MediaQuery.of(context).size.height * 0.16,
         decoration: BoxDecoration(
@@ -115,9 +118,7 @@ class SahihWidgetState extends State<SahihWidget> {
           children: [
             ColorFiltered(
               colorFilter: ColorFilter.mode(
-                (color != Colors.grey)?
-                Colors.transparent:
-                Colors.grey,
+                (color != Colors.grey) ? Colors.transparent : Colors.grey,
                 BlendMode.saturation,
               ),
               child: Image.asset(
@@ -126,32 +127,42 @@ class SahihWidgetState extends State<SahihWidget> {
                 fit: BoxFit.fill,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                width: double.infinity,
-                height: 24,
-                // padding: const  EdgeInsets.symmetric(horizontal: 8.0),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              child: Transform.rotate(
+                angle:  pi / 180 * 180,
                 child: LiquidLinearProgressIndicator(
-                  borderRadius: 50,
                   value: progress * 0.01,
-                  valueColor: AlwaysStoppedAnimation(
-                      (color != Colors.grey)?
-                      (progress == 100)? color.withOpacity(0.8):
-                      color: Colors.grey.shade800
-                      ),
-                  backgroundColor: Colors.white,
-                  borderColor: Colors.white,
-                  borderWidth: 3.5,
+                  valueColor: AlwaysStoppedAnimation((color != Colors.grey)
+                      ? Colors.white.withOpacity(0.3)
+                      : Colors.grey.shade800),
+                  backgroundColor: color,
+                  borderWidth: 0,
+                  borderColor: color,
                   direction: Axis.horizontal,
-                  center: Text(
-                    "${progress.toInt()}%",
-                    style: TextStyle(color: (progress == 100)? Colors.white: Colors.black),
+                  center: Transform.rotate(
+                    angle: pi / 180 * 180,
+                    child: Text(
+                      "${progress.toInt()}%",
+                      style: TextStyle(
+                          color: (progress == 100) ? Colors.white : Colors.black),
+                    ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 10,)
+            // LinearProgressIndicator(
+            //   value: progress * 0.01,
+            //   valueColor: AlwaysStoppedAnimation(
+            //       (color != Colors.grey) ?
+            //       // (progress == 100) ?
+            //       color.withOpacity(0.8)
+            //       // : color
+            //       : Colors.grey.shade800),
+            // ),
+            const SizedBox(
+              height: 14,
+            )
           ],
         ),
       ),

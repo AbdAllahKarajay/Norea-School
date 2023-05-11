@@ -69,10 +69,10 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       Icon(Icons.timelapse_rounded, color: Colors.transparent,),
       Icon(Icons.timelapse_rounded),
       Icon(Icons.my_library_books_rounded)
-    ].reversed.toList();
+    ].reversed.map((e) => Center(child: e,)).toList();
 
     return DataTable(
-      border: TableBorder(
+      border: const TableBorder(
           verticalInside: BorderSide(color: AppColors.Laurel),
           left: BorderSide(color: AppColors.Laurel),
           right: BorderSide(color: AppColors.Laurel),
@@ -101,15 +101,15 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
 
     List<DataRow> rowsList = recitations.map((Recitation recitation) {
     final List<DataCell> cells = [
-      DataCell(Text('${recitation.pages.length}')),
-      DataCell(Text('${recitation.time}')),
-      DataCell(Icon(Icons.star, color: AppColors.gold,)),
-      DataCell(Text('${recitation.NOM}')),
-      DataCell(Text('${recitation.rate}')),
-      DataCell(Text(recitation.pages.join(","))),
-      DataCell(Text(recitation.instName)),
-      DataCell(Text(recitation.date)),
-    ].getRange(0, isDay? 7: 8).toList();
+      Text('${recitation.pages.length}'),
+      Text('${recitation.time}'),
+      Icon(Icons.star, color: AppColors.gold,),
+      Text('${recitation.NOM}'),
+      Text('${recitation.rate}'),
+      Text(recitation.pages.join(",")),
+      Text(recitation.instName),
+      Text(recitation.date),
+    ].getRange(0, isDay? 7: 8).map((e) => DataCell(Center(child: e,))).toList();
 
     totalPages += recitation.pages.length;
     totalTime += recitation.time;
@@ -118,15 +118,15 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
   }).toList();
 
     final lastRowCells = [
-      DataCell(Text('$totalPages')),
-      DataCell(Text('$totalTime')),
-      const DataCell(Text(' -- ')),
-      const DataCell(Text(' -- ')),
-      const DataCell(Text(' -- ')),
-      const DataCell(Text(' -- ')),
-      const DataCell(Text(' -- ')),
-      const DataCell(Text(' -- ')),
-    ].getRange(0, isDay? 7: 8).toList();
+      Text('$totalPages'),
+      Text('$totalTime'),
+      const Text(' -- '),
+      const Text(' -- '),
+      const Text(' -- '),
+      const Text(' -- '),
+      const Text(' -- '),
+      const Text(' -- '),
+    ].getRange(0, isDay? 7: 8).map((e) => DataCell(Center(child: e,))).toList();
 
     final lastRow = DataRow(
       color: MaterialStateColor.resolveWith((states) {
@@ -137,9 +137,6 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
     rowsList.add(lastRow);
     return rowsList;
   }
-
-  List<DataCell> getCells(List<dynamic> cells) =>
-      cells.map((data) => DataCell(Text('$data'))).toList();
 
 
   void onSort(int columnIndex, bool ascending) {

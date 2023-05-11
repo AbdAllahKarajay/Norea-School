@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:norea_school_student/pages/personal_page2.dart';
 
 import '../Theme/Colors.dart';
 
@@ -20,16 +19,16 @@ class PersonalPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            actions: [
-              IconButton(
-                  icon: Icon(Icons.sync_alt_outlined),
-                  onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PersonalPage2(),
-                        ),
-                      ))
-            ],
+            // actions: [
+            //   IconButton(
+            //       icon: Icon(Icons.sync_alt_outlined),
+            //       onPressed: () => Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //               builder: (context) => PersonalPage2(),
+            //             ))
+            //   )
+            // ],
             centerTitle: true,
             pinned: true,
             snap: true,

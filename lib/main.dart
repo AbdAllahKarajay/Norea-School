@@ -75,14 +75,14 @@ class HomePage extends StatelessWidget {
               FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: Container(
             color: AppColors.secondaryColor.withOpacity(0.35),
-            child: BottomAppBar(
-              shape: const CircularNotchedRectangle(),
+            child: const BottomAppBar(
+              shape: CircularNotchedRectangle(),
               color: AppColors.secondaryColor,
               child: TabBar(
                 indicatorColor: Colors.transparent,
                 labelColor: AppColors.MainTitleColor,
                 unselectedLabelColor: Colors.black54,
-                tabs: const [
+                tabs: [
                   Tab(
                     text: 'تسميعاتي',
                   ),

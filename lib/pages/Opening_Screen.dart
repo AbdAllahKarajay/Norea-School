@@ -23,7 +23,7 @@ class _Opening_ScreenState extends State<Opening_Screen> {
       ),
       extendBodyBehindAppBar: true,
       body: Container(
-        // color: AppColors.primaryColor.withOpacity(0.9),
+        color: AppColors.primaryColor.withOpacity(0.9),
         child: Container(
           // decoration: BoxDecoration(
           // // color: AppColors.primaryColor.withOpacity(1),
@@ -49,9 +49,7 @@ class _Opening_ScreenState extends State<Opening_Screen> {
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("images/png background.png"),
-                    // image: AssetImage("images/grey background.png"),
                     fit: BoxFit.cover,
-                  // colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.colorBurn)
                 )),
             child: Center(
               child: SingleChildScrollView(
@@ -65,12 +63,6 @@ class _Opening_ScreenState extends State<Opening_Screen> {
                           "images/Logo.png",
                           fit: BoxFit.contain,
                         )),
-                    // Text("تطبيق الطالبة",
-                    //     style: TextStyle(
-                    //         color: Colors.black,
-                    //         fontSize: MediaQuery.of(context).size.height * 0.03,
-                    //         fontWeight: FontWeight.w500,
-                    //         fontFamily: AppFonts.secondaryFont)),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.030,
                     ),
@@ -82,8 +74,8 @@ class _Opening_ScreenState extends State<Opening_Screen> {
                           border: Border.all(width: 2,color: AppColors.secondaryColor//Color.fromARGB(255, 12, 205, 163)
                             )
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 15),
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 15),
                         child: TextField(
                           style: TextStyle(color: AppColors.secondaryColor//Color.fromARGB(255, 12, 205, 163)
                           ),
