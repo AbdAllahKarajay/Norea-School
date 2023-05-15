@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../Theme/Colors.dart';
 
@@ -19,29 +19,21 @@ class PersonalPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            // actions: [
-            //   IconButton(
-            //       icon: Icon(Icons.sync_alt_outlined),
-            //       onPressed: () => Navigator.push(
-            //             context,
-            //             MaterialPageRoute(
-            //               builder: (context) => PersonalPage2(),
-            //             ))
-            //   )
-            // ],
             centerTitle: true,
             pinned: true,
             snap: true,
             floating: true,
             backgroundColor: AppColors.primaryColor,
-            expandedHeight: MediaQuery.of(context).size.height * 0.355,
+            expandedHeight: MediaQuery.of(context).size.height * 0.34,
             flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.parallax,
                 background: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.04),
                     CircleAvatar(
-                      radius: MediaQuery.of(context).size.width * 0.195,
+                      radius: MediaQuery.of(context).size.width * 0.18,
                       backgroundColor: Colors.grey.shade400,
                       backgroundImage: AssetImage('images/person.jpg'),
                     ),
@@ -79,8 +71,8 @@ class PersonalPage extends StatelessWidget {
                 Card(
                   child: ListTile(
                     title: const Text('emojis'),
-                    subtitle: Container(
-                        height: MediaQuery.of(context).size.height * 0.2,
+                    subtitle: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.18,
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
@@ -89,20 +81,35 @@ class PersonalPage extends StatelessWidget {
                                       width: MediaQuery.of(context).size.width *
                                           0.03,
                                     )
-                                  : Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Image.asset(
-                                          'images/emoji.jpg',
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.07,
+                                  : Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 14),
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 4),
+                                      decoration: BoxDecoration(
+                                          color: Color.fromARGB(255, 220, 180, 220).withRed((index~/20)%2 > 0 ? 240- (index-(index~/20)*20)~/2*15: (index-(index~/20)*20)~/2*15+120),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(25),
+                                              topRight: Radius.circular(25),
+                                              bottomLeft: Radius.circular(25),
+                                              // bottomRight: Radius.circular(20),
+                                            )
+                                      ),
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Image.asset(
+                                              'images/emoji.png',
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.07,
+                                            ),
+                                            Text('2023-4-1',style: TextStyle(color: Colors.white.withOpacity(1), fontSize: 12))
+                                          ],
                                         ),
-                                        Text('2023-4-1')
-                                      ],
-                                    );
+                                    ),
+                                  );
                             })),
                   ),
                 ),
@@ -113,49 +120,75 @@ class PersonalPage extends StatelessWidget {
                         margin: EdgeInsets.all(
                             MediaQuery.of(context).size.width * 0.045),
                         decoration: BoxDecoration(
+                          image: DecorationImage(image: Image.asset("images/png background.png").image, repeat: ImageRepeat.repeatX,opacity: 0.7),
+                          // color: AppColors.primaryColor.withOpacity(0.5),
+                          // gradient: LinearGradient(
+                          //   begin: Alignment.topCenter,
+                          //   end: Alignment.bottomCenter,
+                          //     colors: [
+                          //       AppColors.primaryColor.withOpacity(0),
+                          //       AppColors.primaryColor.withOpacity(0.5),
+                          // ]),
                           border: Border.all(color: Colors.grey, width: 0.1),
                         ),
                         height: MediaQuery.of(context).size.height * 0.5,
                         child: ListView.builder(
                             scrollDirection: Axis.vertical,
-                            itemCount: 30,
+                            itemCount: 240,
                             itemBuilder: (context, index) => (index % 2 != 0)
-                                ? Row(
-                                    children: [
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                      ),
-                                      Text(
-                                        '2023-4-1',
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.05),
-                                      ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.1,
-                                      ),
-                                      Text(
-                                        'رسالة شكر ${index ~/ 2 + 1}',
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.05),
-                                      ),
-                                    ],
-                                  )
+                              ? Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 2),
+                                    child: CustomPaint(
+                                      painter: SpecialChatBubbleOne(
+                                          color: Color.fromARGB(255, 220, 180, 220).withRed((index~/20)%2 > 0 ? 240- (index-(index~/20)*20)~/2*15: (index-(index~/20)*20)~/2*15+120),
+                                          alignment: Alignment.topLeft,
+                                          tail: true,),
+                                      child: Container(
+                                        constraints: BoxConstraints(
+                                          maxWidth: MediaQuery.of(context).size.width * .7,
+                                        ),
+                                        margin: EdgeInsets.fromLTRB(17, 7, 7, 2),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          textDirection: TextDirection.ltr,
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.only(right: 4),
+                                              constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context).size.width * .55,
+                                              ),
+                                              child: Text(
+                                                  "رسالة شكر ${index ~/ 2 + 1}",
+                                                  style: TextStyle(color: Colors.white,),
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                            ),
+                                            Container(
+                                              constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context).size.width * .15,
+                                              ),
+                                              child: Text(
+                                                "2023/5/11",
+                                                style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 10,),
+                                                textAlign: TextAlign.right,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ),
+                                  ),
+                              )
                                 : SizedBox(
                                     width: MediaQuery.of(context).size.height *
                                         0.03,
                                   ))),
                   ),
                 ),
+                SizedBox(height: 50,),
               ]),
             ),
           ),

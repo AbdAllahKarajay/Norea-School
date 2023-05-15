@@ -14,13 +14,19 @@ class ResultChips extends StatefulWidget {
 }
 
 class _ResultChipsState extends State<ResultChips> {
+  final chipsTexts = [
+    "اليوم",
+    "الكل",
+    "اسبوع",
+    "شهر",
+    "موسم",
+  ];
   int _indexSelected = 0;
 
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(canvasColor: Colors.transparent),
-      // child: Chip(
         child: SizedBox(
           height: 50,
           child: Center(
@@ -31,29 +37,7 @@ class _ResultChipsState extends State<ResultChips> {
                 itemBuilder: (context, index) {
                   if (index.isEven) return const SizedBox(width: 8);
                   return ChoiceChip(
-                    label: Builder(
-                      builder: (context) {
-                        String text = '';
-                        switch (index ~/ 2 + 1) {
-                          case 1:
-                            text = 'اليوم';
-                            break;
-                          case 2:
-                            text = 'الكل';
-                            break;
-                          case 3:
-                            text = 'اسبوع';
-                            break;
-                          case 4:
-                            text = 'شهر';
-                            break;
-                          case 5:
-                            text = 'موسم';
-                            break;
-                        }
-                        return Text(text);
-                      },
-                    ),
+                    label: Text(chipsTexts[index~/2 ]),
                     selected: isSelected(index),
                     backgroundColor: AppColors.Downy.withOpacity(0.0),
                     shadowColor: Colors.greenAccent.shade400,

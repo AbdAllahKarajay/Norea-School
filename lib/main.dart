@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+  final chipsController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,10 @@ class HomePage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.calendar_month),
+              onPressed: () => chipsController.animateTo(chipsController.offset == 0? 100:0, duration: Duration(milliseconds: 1000), curve: Curves.ease),
+            ),
             actions: [
               GestureDetector(
                 onTap: () => Navigator.push(context,MaterialPageRoute(
@@ -59,8 +64,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(width: 10,),
             ],
             automaticallyImplyLeading: false,
-            systemOverlayStyle:
-                SystemUiOverlayStyle(statusBarColor: AppColors.primaryColor),
+            systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: AppColors.primaryColor),
             centerTitle: true,
             title: const Text("اسم الطالبة", style: TextStyle(fontFamily: 'fonts/Sahel-VF.ttf'),),
             backgroundColor: AppColors.primaryColor,
@@ -95,7 +99,7 @@ class HomePage extends StatelessWidget {
           ),
           body: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
-            children: [const RecitationsPage2(), BlocProvider(create: (context)=>SahihCubit(SahihInitial()),child: const SahihScreen())],
+            children: [RecitationsPage2(chipsController: chipsController), BlocProvider(create: (context)=>SahihCubit(SahihInitial()),child: const SahihScreen())],
           ),
         ),
       ),

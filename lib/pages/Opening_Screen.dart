@@ -96,7 +96,7 @@ class _Opening_ScreenState extends State<Opening_Screen> {
                       onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage())),
+                              builder: (context) => HomePage())),
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.06,
                         width: MediaQuery.of(context).size.width * 0.75,

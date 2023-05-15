@@ -5,7 +5,8 @@ import '../data/recitations.dart';
 import '../widgets/results_chips.dart';
 
 class RecitationsPage2 extends StatefulWidget {
-  const RecitationsPage2({super.key});
+  const RecitationsPage2({super.key, required this.chipsController});
+  final ScrollController chipsController;
 
   @override
   State<RecitationsPage2> createState() => _RecitationsPage2State();
@@ -16,7 +17,6 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
   int? sortColumnIndex;
   bool isAscending = false;
   bool isDay = false;
-
 
   @override
   void initState() {
@@ -35,26 +35,20 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
                 AppColors.secondaryColor.withOpacity(0.35),
               ])),
           child: ListView(
+          controller: widget.chipsController,
+          physics: const NeverScrollableScrollPhysics(),
             children:[
-              // Container(
-                // color: AppColors.primaryColor.withOpacity(0.5),
-                  // child:
-                  ResultChips(notifyParent: refresh),
-              // ),
-              SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  // child: Container(
-                  //     decoration: BoxDecoration(gradient: LinearGradient(
-                  //         begin: AlignmentDirectional.topCenter,
-                  //         end: AlignmentDirectional.bottomCenter,
-                  //         colors: [
-                  //           AppColors.primaryColor.withOpacity(0.5),
-                  //           AppColors.secondaryColor.withOpacity(0.35),
-                  //           // AppColors.primaryColor.withOpacity(0.6),
-                  //         ])),
-                      child: buildDataTable())
-              // ),
+              ResultChips(notifyParent: refresh),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.8,
+                child: SingleChildScrollView(
+                  child: SingleChildScrollView(
+                        // physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                          child: buildDataTable()
+                    ),
+                ),
+              ),
             ]
       ),
         );
@@ -117,7 +111,7 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
     return DataRow(cells: cells);
   }).toList();
 
-    final lastRowCells = [
+    var lastRowCells = [
       Text('$totalPages'),
       Text('$totalTime'),
       const Text(' -- '),
@@ -128,7 +122,26 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       const Text(' -- '),
     ].getRange(0, isDay? 7: 8).map((e) => DataCell(Center(child: e,))).toList();
 
-    final lastRow = DataRow(
+    var lastRow = DataRow(
+      color: MaterialStateColor.resolveWith((states) {
+        return Colors.red.withOpacity(0.3);
+      }),
+      cells: lastRowCells,
+    );
+    rowsList.add(lastRow);
+
+    lastRowCells = [
+      const Text(''),
+      const Text(''),
+      const Text(''),
+      const Text(''),
+      const Text(''),
+      const Text(''),
+      const Text(''),
+      const Text(''),
+    ].getRange(0, isDay? 7: 8).map((e) => DataCell(Center(child: e,))).toList();
+
+    lastRow = DataRow(
       color: MaterialStateColor.resolveWith((states) {
         return Colors.red.withOpacity(0.3);
       }),

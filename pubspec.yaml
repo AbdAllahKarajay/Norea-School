@@ -48,6 +48,7 @@ dependencies:
   dropdown_button2: ^2.0.0
   eva_icons_flutter: ^3.1.0
   flutter_swipe_detector: ^2.0.0
+  chat_bubbles: ^1.4.1
 
 
 dev_dependencies:
