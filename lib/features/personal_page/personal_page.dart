@@ -3,7 +3,7 @@
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 
-import '../Theme/Colors.dart';
+import '../../Theme/Colors.dart';
 
 class PersonalPage extends StatelessWidget {
   PersonalPage({Key? key}) : super(key: key);

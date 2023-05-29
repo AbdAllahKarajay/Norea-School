@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:norea_school_student/pages/personal_page.dart';
-import '../Theme//Colors.dart';
-import '../data/students.dart';
-import '../models/student.dart';
-import '../widgets/leaderboard_single.dart';
+import 'package:norea_school_student/features/personal_page/personal_page.dart';
+import '../../Theme/Colors.dart';
+import '../../data/students.dart';
+import '../../data/models/student.dart';
+import '../../widgets/leaderboard_single.dart';
 
 class Leaderboard extends StatefulWidget {
   const Leaderboard({super.key});
@@ -19,7 +19,6 @@ class _LeaderboardState extends State<Leaderboard> {
   late List<Student> students;
 
   late ConfettiController _confettiController;
-
   bool fire = false;
 
   @override

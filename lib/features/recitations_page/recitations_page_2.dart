@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:norea_school_student/Theme/Colors.dart';
-import 'package:norea_school_student/models/Recitation.dart';
-import '../data/recitations.dart';
-import '../widgets/results_chips.dart';
+import 'package:norea_school_student/data/models/recitation.dart';
+import 'package:norea_school_student/data/repos/remote_repos/remote_rec_repo.dart';
+import 'package:norea_school_student/features/recitations_page/bloc/rec_bloc.dart';
+import 'package:norea_school_student/main.dart';
+import '../../widgets/results_chips.dart';
+import 'bloc/filter_enum.dart';
 
 class RecitationsPage2 extends StatefulWidget {
   const RecitationsPage2({super.key, required this.chipsController});
@@ -13,47 +17,52 @@ class RecitationsPage2 extends StatefulWidget {
 }
 
 class _RecitationsPage2State extends State<RecitationsPage2> {
-  late List<Recitation> recitations;
-  int? sortColumnIndex;
-  bool isAscending = false;
-  bool isDay = false;
+  List<Recitation> get recitations => recBloc.state.recs;
+  final recBloc = getIt.get<RecBloc>();
+  bool get isDay => recBloc.state.filter.index == 0;
+  final remoteRepo = getIt.get<RemoteRecRepo>();
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    recitations = List.of(recData);
+    final recs = await remoteRepo.getUsersRecs(0);
+    recBloc.emit(recBloc.state.copyWith(recs: recs));
+    recBloc.add(RecFiltering(Filter.day));
   }
 
   @override
   Widget build(BuildContext context) =>
-        Container(
-          decoration: BoxDecoration(gradient: LinearGradient(
-              begin: AlignmentDirectional.topCenter,
-              end: AlignmentDirectional.bottomCenter,
-              colors: [
-                AppColors.primaryColor.withOpacity(0.5),
-                AppColors.secondaryColor.withOpacity(0.35),
-              ])),
-          child: ListView(
-          controller: widget.chipsController,
-          physics: const NeverScrollableScrollPhysics(),
-            children:[
-              ResultChips(notifyParent: refresh),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.8,
-                child: SingleChildScrollView(
+        BlocProvider.value(
+          value: recBloc,
+          child: Container(
+            decoration: BoxDecoration(gradient: LinearGradient(
+                begin: AlignmentDirectional.topCenter,
+                end: AlignmentDirectional.bottomCenter,
+                colors: [
+                  AppColors.primaryColor.withOpacity(0.5),
+                  AppColors.secondaryColor.withOpacity(0.35),
+                ])),
+            child: ListView(
+            controller: widget.chipsController,
+            physics: const NeverScrollableScrollPhysics(),
+              children:[
+                const ResultChips(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.8,
                   child: SingleChildScrollView(
-                        // physics: const BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                          child: buildDataTable()
-                    ),
+                    child: SingleChildScrollView(
+                          // physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                            child: buildDataTable(context)
+                      ),
+                  ),
                 ),
-              ),
-            ]
-      ),
+              ]
+            ),
+          ),
         );
 
-  Widget buildDataTable() {
+  Widget buildDataTable(BuildContext context) {
     final List<Widget> myColumns = const [
       Text('التاريخ'),
       Text('اسم الآنسة'),
@@ -65,19 +74,23 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
       Icon(Icons.my_library_books_rounded)
     ].reversed.map((e) => Center(child: e,)).toList();
 
-    return DataTable(
-      border: const TableBorder(
-          verticalInside: BorderSide(color: AppColors.Laurel),
-          left: BorderSide(color: AppColors.Laurel),
-          right: BorderSide(color: AppColors.Laurel),
-          // bottom: BorderSide(color: AppColors.Laurel),
-      ),
+    return BlocBuilder<RecBloc, RecState>(
+      builder: (context,state) {
+        return DataTable(
+          border: const TableBorder(
+              verticalInside: BorderSide(color: AppColors.Laurel),
+              left: BorderSide(color: AppColors.Laurel),
+              right: BorderSide(color: AppColors.Laurel),
+              // bottom: BorderSide(color: AppColors.Laurel),
+          ),
 
-      columnSpacing: 20,
-      sortAscending: isAscending,
-      sortColumnIndex: sortColumnIndex,
-      columns: getColumns(myColumns.getRange(0,isDay? 7: 8).toList()),
-      rows: getRows(recitations),
+          columnSpacing: 20,
+          sortAscending: recBloc.state.isAscending,
+          sortColumnIndex: recBloc.state.sortingColumn,
+          columns: getColumns(myColumns.getRange(0,isDay? 7: 8).toList()),
+          rows: getRows(recitations),
+        );
+      }
     );
   }
 
@@ -97,7 +110,7 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
     final List<DataCell> cells = [
       Text('${recitation.pages.length}'),
       Text('${recitation.time}'),
-      Icon(Icons.star, color: AppColors.gold,),
+      const Icon(Icons.star, color: AppColors.gold,),
       Text('${recitation.NOM}'),
       Text('${recitation.rate}'),
       Text(recitation.pages.join(",")),
@@ -177,20 +190,10 @@ class _RecitationsPage2State extends State<RecitationsPage2> {
 
     }
 
-    setState(() {
-      sortColumnIndex = columnIndex;
-      isAscending = ascending;
-    });
+    recBloc.add(RecSorting(columnIndex, ascending));
   }
 
   int compareSame(bool ascending, dynamic value1, dynamic value2) =>
       ascending ? value1.compareTo(value2) : value2.compareTo(value1);
-
-  refresh(isRes, isDay) {
-    setState(() {
-      sortColumnIndex = 0;
-      this.isDay = isDay;
-    });
-  }
 
 }

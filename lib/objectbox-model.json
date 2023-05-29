@@ -1,0 +1,106 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7227024201257795265",
+      "lastPropertyId": "9:7989921675900145591",
+      "name": "Recitation",
+      "properties": [
+        {
+          "id": "1:714036835843524796",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7867750125083942396",
+          "name": "instName",
+          "type": 9
+        },
+        {
+          "id": "3:2971805577439810748",
+          "name": "date",
+          "type": 9
+        },
+        {
+          "id": "4:4333427790461529280",
+          "name": "book",
+          "type": 9
+        },
+        {
+          "id": "5:773176955651857343",
+          "name": "tome",
+          "type": 6
+        },
+        {
+          "id": "6:2132094385606709400",
+          "name": "rate",
+          "type": 6
+        },
+        {
+          "id": "7:163749316868462034",
+          "name": "NOM",
+          "type": 6
+        },
+        {
+          "id": "8:4684587308383479175",
+          "name": "time",
+          "type": 6
+        },
+        {
+          "id": "9:7989921675900145591",
+          "name": "pages",
+          "type": 23
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:6807326854828059660",
+      "lastPropertyId": "5:2715515925420880920",
+      "name": "Student",
+      "properties": [
+        {
+          "id": "1:5064905990790187498",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4459408393858788999",
+          "name": "isUser",
+          "type": 1
+        },
+        {
+          "id": "3:1204221141198249393",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:3690109178533892249",
+          "name": "avg",
+          "type": 8
+        },
+        {
+          "id": "5:2715515925420880920",
+          "name": "pLW",
+          "type": 6
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:6807326854828059660",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

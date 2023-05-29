@@ -1,19 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:norea_school_student/Sahih_Screen/Presentation/sahih_select_screen.dart';
-import 'package:norea_school_student/pages/Opening_Screen.dart';
-import 'package:norea_school_student/pages/leaderboard.dart';
-import 'package:norea_school_student/pages/personal_page.dart';
-import 'package:norea_school_student/pages/recitations_page_2.dart';
-import 'package:norea_school_student/Theme/Colors.dart';
-import 'package:norea_school_student/Theme/Fonts.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get_it/get_it.dart';
+import 'package:norea_school_student/data/repos/remote_repos/remote_rec_repo.dart';
 
-import 'Sahih_Screen/Logic/sahih_cubit.dart';
-import 'Sahih_Screen/Logic/sahih_states.dart';
+import 'package:norea_school_student/features/opening_screen/bloc/login_bloc.dart';
+import 'package:norea_school_student/features/opening_screen/Opening_Screen.dart';
+import 'package:norea_school_student/Theme/Fonts.dart';
+import 'package:norea_school_student/features/recitations_page/bloc/rec_bloc.dart';
+
+import 'data/repos/local_repos/local_rec_repo.dart';
+import 'data/repos/local_repos/local_student_repo.dart';
+import 'data/repos/remote_repos/remote_student_repo.dart';
+
+import 'objectbox.g.dart';
 
 void main() {
+  setUpGetIT();
   runApp(const MyApp());
+}
+
+final getIt = GetIt.instance;
+
+void setUpGetIT(){
+  // final Store store = openStore();
+  // getIt.registerSingleton<LocalStudentRepo>(LocalStudentRepo(store));
+  // getIt.registerSingleton<LocalRecRepo>(LocalRecRepo(store));
+  //TODO: set endpoints
+  getIt.registerSingleton<RemoteStudentRepo>(RemoteStudentRepo(""));
+  getIt.registerSingleton<RemoteRecRepo>(RemoteRecRepo(""));
+
+  getIt.registerSingleton<LoginBloc>(LoginBloc());
+  getIt.registerSingleton<RecBloc>(RecBloc());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,6 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        builder: EasyLoading.init(),
         debugShowCheckedModeBanner: false,
         // supportedLocales: const [
         //   Locale("ar"),
@@ -30,79 +48,9 @@ class MyApp extends StatelessWidget {
         title: 'Student Demo',
         theme: ThemeData(
           fontFamily: AppFonts.primaryFont,
-        ),
-        home: const Opening_Screen());
-  }
-}
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
-  final chipsController = ScrollController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.calendar_month),
-              onPressed: () => chipsController.animateTo(chipsController.offset == 0? 100:0, duration: Duration(milliseconds: 1000), curve: Curves.ease),
-            ),
-            actions: [
-              GestureDetector(
-                onTap: () => Navigator.push(context,MaterialPageRoute(
-                  builder: (context) => PersonalPage(),)),
-                child: CircleAvatar(
-                  radius: MediaQuery.of(context).size.width * 0.06,
-                  backgroundColor: Colors.grey.shade400,
-                  child: Icon(Icons.person_rounded, color: Colors.grey.shade700, size: MediaQuery.of(context).size.width * 0.11,)// Image.asset('null.png'),
-                ),
-              ),
-              const SizedBox(width: 10,),
-            ],
-            automaticallyImplyLeading: false,
-            systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: AppColors.primaryColor),
-            centerTitle: true,
-            title: const Text("اسم الطالبة", style: TextStyle(fontFamily: 'fonts/Sahel-VF.ttf'),),
-            backgroundColor: AppColors.primaryColor,
-          ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: AppColors.primaryColor,
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Leaderboard())),
-            child: const Icon(Icons.leaderboard),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: Container(
-            color: AppColors.secondaryColor.withOpacity(0.35),
-            child: const BottomAppBar(
-              shape: CircularNotchedRectangle(),
-              color: AppColors.secondaryColor,
-              child: TabBar(
-                indicatorColor: Colors.transparent,
-                labelColor: AppColors.MainTitleColor,
-                unselectedLabelColor: Colors.black54,
-                tabs: [
-                  Tab(
-                    text: 'تسميعاتي',
-                  ),
-                  Tab(
-                    text: 'المسار الكلي',
-                  )
-                ],
-              ),
-            ),
-          ),
-          body: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            children: [RecitationsPage2(chipsController: chipsController), BlocProvider(create: (context)=>SahihCubit(SahihInitial()),child: const SahihScreen())],
-          ),
         ),
-      ),
+        home: const OpeningScreen()
     );
   }
 }

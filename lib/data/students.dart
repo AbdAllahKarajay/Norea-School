@@ -1,4 +1,4 @@
-import '../models/student.dart';
+import '../data/models/student.dart';
 
 final stuData = <Student>[
   Student("الأولى", 5.6, 30),

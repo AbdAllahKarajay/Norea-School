@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:palette_generator/palette_generator.dart';
-import 'package:norea_school_student/Sahih_Screen/Logic/sahih_states.dart';
+import 'sahih_states.dart';
+
+export 'sahih_states.dart';
 
 class SahihCubit extends Cubit<SahihStates> {
 
-  SahihCubit(super.initialState);
-
   List<Color> colors=[];
+
+  SahihCubit(super.initialState);
 
 
   getColors() async {
@@ -27,10 +29,20 @@ class SahihCubit extends Cubit<SahihStates> {
     emit(SahihLoading());
 
 
-    for (String sahih in names) {
-       Color color = await _updatePaletteGenerator(sahih);
-       colors.add(color);
-    }
+    // for (String sahih in names) {
+    //    Color color = await _updatePaletteGenerator(sahih);
+    //    colors.add(color);
+    // }
+    colors = const[
+      Color(0xff406070),
+      Color(0xff005050),
+      Color(0xff4f2020),
+      Color(0xff306030),
+      Color(0xffb08030),
+      Color(0xff683060),
+      Color(0xff3090c0),
+      Color(0xff607840),
+    ];
 
     emit(SahihLoaded(colors));
   }
@@ -40,7 +52,8 @@ class SahihCubit extends Cubit<SahihStates> {
     var paletteGenerator = await PaletteGenerator.fromImageProvider(
       Image.asset("images/$name.png").image,
     );
-    return paletteGenerator.dominantColor!.color;
+    final c = paletteGenerator.dominantColor!.color;
+    return c;
   }
 
 }

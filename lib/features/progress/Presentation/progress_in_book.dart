@@ -5,9 +5,9 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 
-import '../Theme/Colors.dart';
-import '../Theme/Fonts.dart';
-import '../widgets/choice_chip.dart';
+import '../../../Theme/Colors.dart';
+import '../../../Theme/Fonts.dart';
+import '../../../widgets/choice_chip.dart';
 
 class ProgressInBook extends StatefulWidget {
   final Color color;

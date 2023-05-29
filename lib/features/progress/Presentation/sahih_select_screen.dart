@@ -3,11 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-import 'package:norea_school_student/Sahih_Screen/Logic/sahih_states.dart';
-import 'package:norea_school_student/Sahih_Screen/Logic/sahih_cubit.dart';
+import 'package:norea_school_student/features/progress/Logic/sahih_cubit.dart';
 import 'package:norea_school_student/Theme/colors.dart';
-import 'package:norea_school_student/Theme/fonts.dart';
-import 'package:norea_school_student/pages/progress_in_book.dart';
+import 'package:norea_school_student/features/progress/Presentation/progress_in_book.dart';
 
 class SahihScreen extends StatefulWidget {
   const SahihScreen({Key? key}) : super(key: key);
